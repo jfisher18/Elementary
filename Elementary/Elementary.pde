@@ -13,7 +13,7 @@ void setup() {
   masses = loadStrings("masses.txt");
   elements = new ArrayList<Element>();
   for (int i = 1; i<=118; i++) {
-    elements.add(new Element(i, symbols[i-1], names[i-1],masses[i-1]));
+    elements.add(new Element(i, symbols[i-1], names[i-1], masses[i-1]));
   }
   size(900, 516);
   ellipseMode(CENTER);
@@ -52,9 +52,13 @@ void mousePressed() {
       }
     }
   }
+  if (centered&&!fading&&!centering&&!decentering) {
+    currentElement.decenter();
+  }
 }
 void keyPressed() {
   if (key == ENTER && centered&&!decentering&&!fading) {
     currentElement.decenter();
   }
 }
+

@@ -167,7 +167,7 @@ class Element {
       }
     }
     if (isCentering) {
-      centerStage+=.05;
+      centerStage+=.1;
       diameter = lerp(35.0, 400.0, centerStage);
       currentX = lerp(xPos, 225.0, centerStage);
       currentY = lerp(yPos, 258.0, centerStage);
@@ -181,7 +181,7 @@ class Element {
     }
     if (isDecentering) {
       if (!fading) {
-        centerStage+=.05;
+        centerStage+=.1;
         diameter = lerp(400, 35.0, centerStage);
         currentX = lerp(225.0, xPos, centerStage);
         currentY = lerp(258.0, yPos, centerStage);
