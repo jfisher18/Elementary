@@ -36,7 +36,7 @@ void draw() {
 }
 
 void mousePressed() {
-  if (!centered&&!fading) {
+  if (!centered&&!fading&&!centering) {
     for (Element element : elements) {
       if (element.isOver()) {
         currentElement = element;
