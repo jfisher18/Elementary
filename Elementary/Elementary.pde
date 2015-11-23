@@ -1,10 +1,11 @@
 ArrayList<Element> elements;
 String[] symbols;
 String[] names;
-boolean centering;
+boolean centering, decentering;
 int counter = 0;
-int time;
+boolean centered;
 Element currentElement;
+boolean fading;
 void setup() {
   symbols = loadStrings("symbols.txt");
   names = loadStrings("names.txt");
@@ -14,7 +15,6 @@ void setup() {
   }
   size(900, 516);
   ellipseMode(CENTER);
-  textAlign(CENTER, CENTER);
   noStroke();
   for (Element element : elements) {
     element.fadeIn();
@@ -28,7 +28,7 @@ void draw() {
   }
   if (centering) {
     counter++;
-    if (counter>=16){
+    if (counter>=16) {
       currentElement.center();
       centering = false;
     }
@@ -36,17 +36,23 @@ void draw() {
 }
 
 void mousePressed() {
-  for (Element element : elements) {
-    if (element.isOver()) {
-      currentElement = element;
-      time = millis();
-      for (Element element2 : elements) {
-        if (element2 != currentElement) {
-          element2.fadeOut();
-          centering = true;
-          counter = 0;
+  if (!centered&&!fading) {
+    for (Element element : elements) {
+      if (element.isOver()) {
+        currentElement = element;
+        for (Element element2 : elements) {
+          if (element2 != currentElement) {
+            element2.fadeOut();
+            centering = true;
+            counter = 0;
+          }
         }
       }
     }
   }
-} 
+}
+void keyPressed() {
+  if (key == ENTER && centered) {
+    currentElement.decenter();
+  }
+}

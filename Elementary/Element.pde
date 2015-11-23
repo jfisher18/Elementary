@@ -8,7 +8,7 @@ class Element {
   float alpha = 0;
   boolean isFadingOut;
   boolean isFadingIn;
-  boolean isCentering;
+  boolean isCentering, isDecentering;
   float centerStage = 0;
 
   Element(int inNumber, String inSymbol, String inName) {
@@ -122,16 +122,18 @@ class Element {
     ellipse(currentX, currentY, diameter, diameter);
     fill(255, alpha);
     if (symbol.length()==3) {
-      textSize(int(12*(35.0/diameter)));
+      textSize(int(12*(diameter/35.0)));
     } else {
       textSize(int(16*(diameter/35.0)));
     }
+    textAlign(CENTER, CENTER);
     text(symbol, currentX, currentY-2*(diameter/35.0));
     if (isFadingIn) {
       alpha+=17;
       if (alpha>=255) {
         alpha = 255;
         isFadingIn = false;
+        fading = false;
       }
     }
     if (isFadingOut) {
@@ -139,6 +141,7 @@ class Element {
       if (alpha<=0) {
         alpha = 0;
         isFadingOut = false;
+        fading = false;
       }
     }
     if (isCentering) {
@@ -146,21 +149,44 @@ class Element {
       diameter = lerp(35.0, 400.0, centerStage);
       currentX = lerp(xPos, 225.0, centerStage);
       currentY = lerp(yPos, 258.0, centerStage);
-
-      if (centerStage>=1) {
-        centerStage = 1;
-        isCentering = false;
+    }
+    if (centerStage>=1&&isCentering) {
+      centerStage = 1;
+      isCentering = false;
+      centered = true;
+    }
+    if (isDecentering) {
+      centerStage+=.05;
+      diameter = lerp(400, 35.0, centerStage);
+      currentX = lerp(225.0, xPos, centerStage);
+      currentY = lerp(258.0, yPos, centerStage);
+    }
+    if (centerStage>=1&&isDecentering) {
+      centerStage = 1;
+      isDecentering = false;
+      centered = false;
+      for (Element element : elements) {
+        if (element != this) {
+          element.fadeIn();
+        }
       }
     }
   }
+
   void fadeOut() {
+    fading = true;
     isFadingOut = true;
   }
   void fadeIn() {
+    fading = true;
     isFadingIn = true;
   }
   void center() {
     isCentering =true;
+    centerStage = 0;
+  }
+  void decenter() {
+    isDecentering =true;
     centerStage = 0;
   }
   boolean isOver() {
