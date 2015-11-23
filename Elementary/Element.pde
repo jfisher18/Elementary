@@ -205,7 +205,7 @@ class Element {
       fill(255, textAlpha);
       text(name, 450, 130);
       fill(200, textAlpha);
-      textSize(32);
+      textSize(30);
       text("Atomic Number : " + number, 450, 175);
       if (mass == 0) {
         text("Atomic Mass : N/A", 450, 215);
