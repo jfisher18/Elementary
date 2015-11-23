@@ -201,7 +201,7 @@ class Element {
     }
     if (isCentered) {
       textAlign(LEFT, LEFT);
-      textSize(64);
+      textSize(60);
       fill(255, textAlpha);
       text(name, 450, 130);
       fill(200, textAlpha);
