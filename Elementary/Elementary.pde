@@ -1,6 +1,7 @@
 ArrayList<Element> elements;
 String[] symbols;
 String[] names;
+String[] masses;
 boolean centering, decentering;
 int counter = 0;
 boolean centered;
@@ -9,9 +10,10 @@ boolean fading;
 void setup() {
   symbols = loadStrings("symbols.txt");
   names = loadStrings("names.txt");
+  masses = loadStrings("masses.txt");
   elements = new ArrayList<Element>();
   for (int i = 1; i<=118; i++) {
-    elements.add(new Element(i, symbols[i-1], names[i-1]));
+    elements.add(new Element(i, symbols[i-1], names[i-1],masses[i-1]));
   }
   size(900, 516);
   ellipseMode(CENTER);
@@ -52,7 +54,7 @@ void mousePressed() {
   }
 }
 void keyPressed() {
-  if (key == ENTER && centered&&!decentering) {
+  if (key == ENTER && centered&&!decentering&&!fading) {
     currentElement.decenter();
   }
 }
