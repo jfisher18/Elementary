@@ -1,2 +1,2 @@
 # Elementary
-An interactive periodic table in processing
+An interactive periodic table in Processing
