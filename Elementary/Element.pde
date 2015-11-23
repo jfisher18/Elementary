@@ -164,6 +164,7 @@ class Element {
     if (centerStage>=1&&isDecentering) {
       centerStage = 1;
       isDecentering = false;
+      decentering = false;
       centered = false;
       for (Element element : elements) {
         if (element != this) {
@@ -187,6 +188,7 @@ class Element {
   }
   void decenter() {
     isDecentering =true;
+    decentering = true;
     centerStage = 0;
   }
   boolean isOver() {

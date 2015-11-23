@@ -52,7 +52,7 @@ void mousePressed() {
   }
 }
 void keyPressed() {
-  if (key == ENTER && centered) {
+  if (key == ENTER && centered&&!decentering) {
     currentElement.decenter();
   }
 }
